@@ -25,67 +25,62 @@ class App extends Component {
     profileId: 0,
     myFollowers: [],
     myFollowings: [],
-    pageSize:2,
-    BlogsCount:0,
-    activePage:1,
-  
+    pageSize: 2,
+    BlogsCount: 0,
+    activePage: 1,
   };
-  
 
   componentDidMount() {
     // debbuger;
     // x=window.location.pathname;
     axios
-      .get("http://localhost:4000/blog/count")
+      .get(REACT_APP_BACKEND_URL + "/blog/count")
       .then((result) => {
         this.setState({ BlogsCount: result.data.count });
       })
       .catch((err) => {});
 
-
-      axios
-      .get("http://localhost:4000/blog/Blogs?pageNo="+this.state.activePage+"&size="+this.state.pageSize)
+    axios
+      .get(
+        REACT_APP_BACKEND_URL +
+          "/blog/Blogs?pageNo=" +
+          this.state.activePage +
+          "&size=" +
+          this.state.pageSize
+      )
       .then((result) => {
-      
         this.setState({ Blogs: result.data.message });
       })
       .catch((err) => {});
 
     axios
-      .get("http://localhost:4000/user/myBlogs", {
+      .get(REACT_APP_BACKEND_URL + "/user/myBlogs", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       })
       .then((result) => {
-        debugger;
+        
         if (result.data.length <= 0) {
-          debugger;
+          
           this.state.myBlogsTitle = "You Don't Post Any Blogs Yet";
           document.getElementsByClassName("display-MyBlogs")[0].style.display =
             "flex";
-            this.setState({ MyBlogs: [] });
-
-          }
-          else{
-
-            this.setState({ MyBlogs: result.data });
-          }
+          this.setState({ MyBlogs: [] });
+        } else {
+          this.setState({ MyBlogs: result.data });
+        }
       })
       .catch((err) => {});
-
-      
   }
-  handleFollowingLoad=()=>{
-     
+  handleFollowingLoad = () => {
     axios
-      .get("http://localhost:4000/user/following", {
+      .get(REACT_APP_BACKEND_URL + "/user/following", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       })
       .then((result) => {
-    
         if (result.data.length <= 0) {
           this.state.myBlogsTitle = "You Don't  Follow any one Yet";
           document.getElementsByClassName(
@@ -95,18 +90,16 @@ class App extends Component {
         this.setState({ myFollowings: result.data });
       })
       .catch((err) => {});
-   
-  }
-  handleFollowers=()=>{
-    debugger;
+  };
+  handleFollowers = () => {
+    
     axios
-      .get("http://localhost:4000/user/followers", {
+      .get(REACT_APP_BACKEND_URL + "/user/followers", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       })
       .then((result) => {
-  
         if (result.data.length <= 0) {
           this.state.myBlogsTitle = "You Don't have Followers Yet";
           document.getElementsByClassName(
@@ -116,49 +109,45 @@ class App extends Component {
         this.setState({ myFollowers: result.data });
       })
       .catch((err) => {});
-
-
-  }
+  };
 
   handleFollowing = (id) => {
-    
-    const url = "http://localhost:4000/user/follow";
+    const url = REACT_APP_BACKEND_URL + "/user/follow";
     // const header = {
     //   Authorization: localStorage.getItem("token"),
     //   RequestedProfileId: id,
     // };
 
     axios
-      .post(url,null, { headers: {Authorization: localStorage.getItem("token"),
-      RequestedProfileId: id }})
+      .post(url, null, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          RequestedProfileId: id,
+        },
+      })
       .then((result) => {
-      
         this.setState({ myFollowers: result.data });
       })
       .catch((err) => {
-       
         console.log(err);
       });
   };
 
   handleDelete = (id) => {
-    debugger;
-  
+    
+
     axios
-      .delete("http://localhost:4000/blog/" + id, {
+      .delete(REACT_APP_BACKEND_URL + "/blog/" + id, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       })
       .then((result) => {
-        debugger;
-        if(result.data.length>0)
-        {
+        
+        if (result.data.length > 0) {
           this.setState({ MyBlogs: result.data });
-        }   
-        else
-        {
-          this.setState({ MyBlogs:[] });
+        } else {
+          this.setState({ MyBlogs: [] });
         }
 
         // updateState(data);
@@ -169,25 +158,30 @@ class App extends Component {
   };
 
   handleEmailClick = (id) => {
-    debugger;
+    
     this.state.profileId = id;
   };
-  handlePageClick=(pageNumber)=>
-  {
-    debugger;
-    this.state.activePage=pageNumber;
+  handlePageClick = (pageNumber) => {
+    
+    this.state.activePage = pageNumber;
     document.getElementsByClassName("1")[0].classList.remove("active");
 
     document.getElementsByClassName("active")[0].classList.remove("active");
     document.getElementsByClassName(pageNumber)[0].classList.add("active");
     axios
-    .get("http://localhost:4000/blog/Blogs?pageNo="+pageNumber+"&size="+this.state.pageSize)
-    .then((result) => {
-      debugger;
-      this.setState({ Blogs: result.data.message });
-    })
-    .catch((err) => {});
-  }
+      .get(
+        REACT_APP_BACKEND_URL +
+          "/blog/Blogs?pageNo=" +
+          pageNumber +
+          "&size=" +
+          this.state.pageSize
+      )
+      .then((result) => {
+        
+        this.setState({ Blogs: result.data.message });
+      })
+      .catch((err) => {});
+  };
 
   render() {
     return (
@@ -252,7 +246,6 @@ class App extends Component {
                   Followtitle="Followings"
                   handleFollowingLoad={this.handleFollowingLoad}
                   handleFollowers={this.handleFollowers}
-
                 />
               )}
             ></Route>
@@ -263,7 +256,7 @@ class App extends Component {
                 <BlogsList
                   {...props}
                   BlogsList={this.state.MyBlogs}
-                  title={'MyBlog'}
+                  title={"MyBlog"}
                   blogTitle="Blogs"
                   handleDelete={this.handleDelete}
 
@@ -286,7 +279,6 @@ class App extends Component {
                   activePage={this.state.activePage}
                   handlePageClick={this.handlePageClick}
                 />
-
               )}
             ></Route>
 

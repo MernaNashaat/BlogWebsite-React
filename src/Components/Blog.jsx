@@ -6,14 +6,10 @@ import BloggerBox from "./BloogerAutherBox";
 import { Link } from "react-router-dom";
 
 const Blog = (props) => {
-  debugger;
-  if(props.blogItem.creationTime)
-  {
-    debugger;
-    var creationTime=props.blogItem.creationTime.slice(0,10)
 
+  if (props.blogItem.creationTime) {
+    var creationTime = props.blogItem.creationTime.slice(0, 10);
   }
-  console.log(props.blogItem);
   const handleLikeClick = (id) => {
     document.getElementsByClassName(id)[0].classList.toggle("active");
   };
@@ -32,19 +28,36 @@ const Blog = (props) => {
             />
 
             <div className="bacon-blog-post-inner">
-            <div className="header-div" >
-
-<div className="options"><i className="fa fa-chevron-down"></i></div>
-    <img className="co-logo" src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-vector-add-user-icon-png-image_3773557.jpg" />
-    <div className="co-name"><Link href="/profile"
-     onClick={() =>props.handleEmailClick(props.blogItem.userId)}
-     to={"/profile/" + props.blogItem._id}
-     >
-       {props.blogItem.userEmail}</Link></div>
-  <div className="time "><div className="date-span" style={{display:"inline-block"}}>{creationTime} </div>· <i className="fa fa-globe"></i></div>
-  
-</div>
-              <h3 style={{marginLeft:10+'px'}}>
+              <div className="header-div">
+                <div className="options">
+                  <i className="fa fa-chevron-down"></i>
+                </div>
+                <img
+                  className="co-logo"
+                  src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-vector-add-user-icon-png-image_3773557.jpg"
+                />
+                <div className="co-name">
+                  <Link
+                    href="/profile"
+                    onClick={() =>
+                      props.handleEmailClick(props.blogItem.userId)
+                    }
+                    to={"/profile/" + props.blogItem._id}
+                  >
+                    {props.blogItem.userEmail}
+                  </Link>
+                </div>
+                <div className="time ">
+                  <div
+                    className="date-span"
+                    style={{ display: "inline-block" }}
+                  >
+                    {creationTime}{" "}
+                  </div>
+                  · <i className="fa fa-globe"></i>
+                </div>
+              </div>
+              <h3 style={{ marginLeft: 10 + "px" }}>
                 <a
                   rel="bookmark"
                   title="Permanent link to Finding What Challenges You"
@@ -56,10 +69,12 @@ const Blog = (props) => {
               <blockquote>
                 <p>{props.blogItem.body}</p>
                 <div className="tags-container">
-           
-           {props.blogItem.tags?props.blogItem.tags.map(tag=><span className="tags-span">#{tag}</span>):null}
-      
-       </div>
+                  {props.blogItem.tags
+                    ? props.blogItem.tags.map((tag) => (
+                        <span className="tags-span">#{tag}</span>
+                      ))
+                    : null}
+                </div>
                 <div className="flex-container-row">
                   <p>
                     — Article By :{" "}
@@ -80,20 +95,18 @@ const Blog = (props) => {
                     data-placement="top"
                     type="button"
                     title="View Profile"
-                  >
-                   
-                  </div>
+                  ></div>
                 </div>
               </blockquote>
               <div className="outlineSocialShare">
-              <Link to={"/profile/" + props.blogItem._id}>
-                      <i
-                        className="fa fa-eye "
-                        onClick={() =>
-                          props.handleEmailClick(props.blogItem.userId)
-                        }
-                      ></i>
-                    </Link>
+                <Link to={"/profile/" + props.blogItem._id}>
+                  <i
+                    className="fa fa-eye "
+                    onClick={() =>
+                      props.handleEmailClick(props.blogItem.userId)
+                    }
+                  ></i>
+                </Link>
                 <i
                   className={"fa fa-thumbs-up like " + props.blogItem.userId}
                   data-toggle="tooltip"

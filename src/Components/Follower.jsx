@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 const Follower = (props) => {
-  debugger;
+  
   console.log(props.CurrentFollower);
-    return (
+  return (
     <React.Fragment>
       <React.Fragment>
         <div className="container-box2">
@@ -26,15 +26,21 @@ const Follower = (props) => {
             <div className="data">
               <ul>
                 <li>
-                  {props.CurrentFollower.BlogsIds.length>0?props.CurrentFollower.BlogsIds.length:0}
+                  {props.CurrentFollower.BlogsIds.length > 0
+                    ? props.CurrentFollower.BlogsIds.length
+                    : 0}
                   <span>Blogs</span>
                 </li>
                 <li>
-                  {props.CurrentFollower.followersIds.length>0?props.CurrentFollower.followersIds.length:0}
+                  {props.CurrentFollower.followersIds.length > 0
+                    ? props.CurrentFollower.followersIds.length
+                    : 0}
                   <span>Followers</span>
                 </li>
                 <li>
-                  {props.CurrentFollower.followingIds.length>0?props.CurrentFollower.followingIds.length:0}
+                  {props.CurrentFollower.followingIds.length > 0
+                    ? props.CurrentFollower.followingIds.length
+                    : 0}
                   <span>Following</span>
                 </li>
               </ul>

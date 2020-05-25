@@ -5,18 +5,8 @@ import "../ProfileStyle.css";
 import { Link } from "react-router-dom";
 
 const UserProfile = (props) => {
-  // console.log("from my followers")
-  // console.log(props.myFollowers);
-  var data;
-  // const {userData,setUserData} = useState({});
-  // useEffect(async () => {
-  //     const result = await axios(
-  //       'https://hn.algolia.com/api/v1/search?query=redux',
-  //     );
 
-  //     setData(result.userData);
-  //   });
-  // const [count,setCount]= useState(0);
+  var data;
   const [followers, setFollowers] = useState(0);
   const [following, setFollowing] = useState(0);
   const [blogs, setBlogs] = useState(0);
@@ -28,18 +18,18 @@ const UserProfile = (props) => {
   var count = 0;
 
   useEffect(() => {
-    debugger;
+    
     let url;
     let header;
     if (props.profileId == 0) {
-      url = "http://localhost:4000/user/profile";
+      url = REACT_APP_BACKEND_URL+"/user/profile";
       header = {
         Authorization: localStorage.getItem("token"),
       };
       setTitle("View Your Blogs");
     } else {
-      debugger;
-      url = "http://localhost:4000/user/profile/" + props.profileId;
+      
+      url = REACT_APP_BACKEND_URL+"/user/profile/" + props.profileId;
       header = {
         Authorization: localStorage.getItem("token"),
         RequestedProfileId: props.profileId,
@@ -49,11 +39,11 @@ const UserProfile = (props) => {
     axios
       .get(url, { headers: header })
       .then((result) => {
-        debugger;
+        
         updateState(result.data);
       })
       .catch((err) => {
-        debugger;
+        
         console.log(err);
       });
   }, []);

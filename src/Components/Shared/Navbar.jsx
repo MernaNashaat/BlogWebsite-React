@@ -9,7 +9,6 @@ const NavBar = () => {
     localStorage.removeItem(token);
     setToken("");
   };
-  // localStorage.setItem('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYzU1MmIwYWEwNjk5MjEzMDA3ODZjNCIsImlhdCI6MTU5MDAwNzk4Nn0.51EtR4lhAZnoBoE67BuEfkEwhyn7yCdWnOsPkeVaUnE')
   return (
     <React.Fragment>
       <nav

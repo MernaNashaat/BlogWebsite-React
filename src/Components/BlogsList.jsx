@@ -10,7 +10,6 @@ const BlogsList = (props) => {
   console.log(props);
   // const [Blogs,setBlogs]=useState([1]);
 
-
   // if (props.title=== 'MyBlog'&&props.BlogsList.length===0) {
   //   toast("You Don't Add Posts Yet !");
   // }
@@ -27,7 +26,7 @@ const BlogsList = (props) => {
         </div>
         {props.BlogsList.map((blog) => (
           <BlogListItem
-          key={blog?.id}
+            key={blog?.id}
             {...props}
             BlogsList={blog}
             handleDelete={props.handleDelete}

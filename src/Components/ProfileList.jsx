@@ -5,38 +5,36 @@ import "react-toastify/dist/ReactToastify.css";
 import UserProfile from "./UserProfile";
 import Follower from "./Follower";
 const ProfileList = (props) => {
-  // debugger;
-  // console.log("___________________________________")
-  // console.log(props.myFollowers.length>0||props.myFollowings.length>0);
-  // console.log(props.myFollowings);
-  debugger;
- 
+
   props.handleFollowers();
   props.handleFollowingLoad();
- let condition=(props.myFollowers.length>0||props.myFollowings.length>0)?true:false;
+  let condition =
+    props.myFollowers.length > 0 || props.myFollowings.length > 0
+      ? true
+      : false;
 
- 
   return (
     <React.Fragment>
       <div className="flex-container-row">
-        {
-         condition?
-         props.myFollowers.length === 0&&props.myFollowings.length>0
-          ? props.myFollowings.map((follower) => (
-              <Follower
-                key={follower._id}
-                CurrentFollower={follower}
-                handleFollowing={props.handleFollowing}
-              />
-            ))
-          :props.myFollowings.length===0 &&props.myFollowers.length>0?props.myFollowers.map((follower) => (
-              <Follower
-                key={follower._id}
-                CurrentFollower={follower}
-                handleFollowing={props.handleFollowing}
-              />
-            )):null:null
-        }
+        {condition
+          ? props.myFollowers.length === 0 && props.myFollowings.length > 0
+            ? props.myFollowings.map((follower) => (
+                <Follower
+                  key={follower._id}
+                  CurrentFollower={follower}
+                  handleFollowing={props.handleFollowing}
+                />
+              ))
+            : props.myFollowings.length === 0 && props.myFollowers.length > 0
+            ? props.myFollowers.map((follower) => (
+                <Follower
+                  key={follower._id}
+                  CurrentFollower={follower}
+                  handleFollowing={props.handleFollowing}
+                />
+              ))
+            : null
+          : null}
       </div>
     </React.Fragment>
   );

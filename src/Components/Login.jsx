@@ -8,10 +8,9 @@ import "../style.css";
 import NavBar from "./Shared/Navbar";
 
 const Login = () => {
-
-  debugger;
-  window.$name="Authenticated";
-  window.$signup=false;
+  
+  window.$name = "Authenticated";
+  window.$signup = false;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({
@@ -22,16 +21,13 @@ const Login = () => {
     e.preventDefault();
     if (validateForm()) {
       axios
-        .post("http://localhost:4000/user/login", {
+        .post(REACT_APP_BACKEND_URL + "/user/login", {
           email: email,
           password: password,
         })
-        .then((result) => {
-          debugger;
+        .then((result) => {  
           const data = result.data;
           const token = result.data.token;
-          console.log(data);
-          console.log(token);
           localStorage.removeItem("token");
           localStorage.setItem("token", token);
           window.location.href = "/";
