@@ -31,29 +31,14 @@ window.$name = 'Not Authenticated'
 window.$login=false;
 window.$signup=true;
 
+
+
 ReactDOM.render(
   <React.Fragment>
     <BrowserRouter>
     <NavBar/>
     <App />
     </BrowserRouter>
-    {/* {
-      window.$name==='Not Authenticated'?
-      <BrowserRouter >
-      <Route path="/login" component={Login}></Route>
-      <Route path="/signup" component={Signup}></Route>
-      <NavBar/>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-     {window.$signup? <Signup/>:null } 
-    </BrowserRouter> : <BrowserRouter><NavBar /><App/></BrowserRouter>
-    }
-   
-     */}
-
-
   </React.Fragment> 
   ,
   document.getElementById('root')

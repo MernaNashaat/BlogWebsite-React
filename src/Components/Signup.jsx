@@ -14,12 +14,8 @@ const Signup = () => {
     if (validateForm()) {
       axios
         .post(
-          REACT_APP_BACKEND_URL + "/user/signup",
-          { email: email, name: username, password: password },
-          [
-            { "Content-Type": "application/json" },
-            { "Access-Control-Allow-Origin": "*" },
-          ]
+          process.env.REACT_APP_BACKEND_URL + "/user/signup",
+          { email: email, name: username, password: password }
         )
         .then((result) => {
           const data = result;

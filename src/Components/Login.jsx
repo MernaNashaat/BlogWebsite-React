@@ -21,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     if (validateForm()) {
       axios
-        .post(REACT_APP_BACKEND_URL + "/user/login", {
+        .post(process.env.REACT_APP_BACKEND_URL + "/user/login", {
           email: email,
           password: password,
         })

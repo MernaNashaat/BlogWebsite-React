@@ -22,14 +22,14 @@ const UserProfile = (props) => {
     let url;
     let header;
     if (props.profileId == 0) {
-      url = REACT_APP_BACKEND_URL+"/user/profile";
+      url = process.env.REACT_APP_BACKEND_URL+"/user/profile";
       header = {
         Authorization: localStorage.getItem("token"),
       };
       setTitle("View Your Blogs");
     } else {
       
-      url = REACT_APP_BACKEND_URL+"/user/profile/" + props.profileId;
+      url = process.env.REACT_APP_BACKEND_URL+"/user/profile/" + props.profileId;
       header = {
         Authorization: localStorage.getItem("token"),
         RequestedProfileId: props.profileId,

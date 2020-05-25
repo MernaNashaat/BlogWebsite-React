@@ -42,7 +42,7 @@ const BlogForm = (props) => {
     if (isEdited !== true) {
       axios
         .post(
-          REACT_APP_BACKEND_URL + "/blog/add",
+          process.env.REACT_APP_BACKEND_URL + "/blog/add",
           { title: blog.title, body: blog.body, tags: blog.tags },
           {
             headers: {

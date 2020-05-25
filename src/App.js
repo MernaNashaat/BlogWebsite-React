@@ -14,7 +14,7 @@ import BlogsList from "./Components/BlogsList";
 import StartPost from "./Components/StartPost";
 import ProfileList from "./Components/ProfileList";
 import ErrorPage from "./Components/ErrorPage";
-
+require('dotenv').config();
 class App extends Component {
   state = {
     Blogs: [],
@@ -34,7 +34,7 @@ class App extends Component {
     // debbuger;
     // x=window.location.pathname;
     axios
-      .get(REACT_APP_BACKEND_URL + "/blog/count")
+      .get(process.env.REACT_APP_BACKEND_URL + "/blog/count")
       .then((result) => {
         this.setState({ BlogsCount: result.data.count });
       })
@@ -42,7 +42,7 @@ class App extends Component {
 
     axios
       .get(
-        REACT_APP_BACKEND_URL +
+        process.env.REACT_APP_BACKEND_URL +
           "/blog/Blogs?pageNo=" +
           this.state.activePage +
           "&size=" +
@@ -54,7 +54,7 @@ class App extends Component {
       .catch((err) => {});
 
     axios
-      .get(REACT_APP_BACKEND_URL + "/user/myBlogs", {
+      .get(process.env.REACT_APP_BACKEND_URL + "/user/myBlogs", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -75,7 +75,7 @@ class App extends Component {
   }
   handleFollowingLoad = () => {
     axios
-      .get(REACT_APP_BACKEND_URL + "/user/following", {
+      .get(process.env.REACT_APP_BACKEND_URL + "/user/following", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -94,7 +94,7 @@ class App extends Component {
   handleFollowers = () => {
     
     axios
-      .get(REACT_APP_BACKEND_URL + "/user/followers", {
+      .get(process.env.REACT_APP_BACKEND_URL + "/user/followers", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -112,7 +112,7 @@ class App extends Component {
   };
 
   handleFollowing = (id) => {
-    const url = REACT_APP_BACKEND_URL + "/user/follow";
+    const url = process.env.REACT_APP_BACKEND_URL + "/user/follow";
     // const header = {
     //   Authorization: localStorage.getItem("token"),
     //   RequestedProfileId: id,
@@ -137,7 +137,7 @@ class App extends Component {
     
 
     axios
-      .delete(REACT_APP_BACKEND_URL + "/blog/" + id, {
+      .delete(process.env.REACT_APP_BACKEND_URL + "/blog/" + id, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -170,7 +170,7 @@ class App extends Component {
     document.getElementsByClassName(pageNumber)[0].classList.add("active");
     axios
       .get(
-        REACT_APP_BACKEND_URL +
+        process.env.REACT_APP_BACKEND_URL +
           "/blog/Blogs?pageNo=" +
           pageNumber +
           "&size=" +
